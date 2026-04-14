@@ -11,5 +11,8 @@
       "src": "/api/(.*)",
       "dest": "/api/index.js"
     }
-  ]
+  ],
+  "env": {
+    "SQLITE_STORAGE": "/tmp/notesapp.db"
+  }
 }
