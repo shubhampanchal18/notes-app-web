@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './Notes.css';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 const COLORS = ['#4f7cff', '#ff9f43', '#2dd4bf', '#f97316', '#7c3aed', '#fb7185'];
 
 const Notes = ({ onLogout }) => {
@@ -35,7 +36,7 @@ const Notes = ({ onLogout }) => {
   const fetchNotes = async () => {
     try {
       setFetchLoading(true);
-      const response = await axios.get('http://localhost:5001/api/notes', {
+      const response = await axios.get(`${API_BASE_URL}/api/notes`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -56,7 +57,7 @@ const Notes = ({ onLogout }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5001/api/notes',
+        `${API_BASE_URL}/api/notes`,
         {
           title,
           content,
@@ -110,7 +111,7 @@ const Notes = ({ onLogout }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5001/api/notes/${noteId}`,
+        `${API_BASE_URL}/api/notes/${noteId}`,
         {
           title: editTitle,
           content: editContent,
@@ -136,7 +137,7 @@ const Notes = ({ onLogout }) => {
   const handleDeleteNote = async (noteId) => {
     if (window.confirm('Are you sure you want to delete this note?')) {
       try {
-        await axios.delete(`http://localhost:5001/api/notes/${noteId}`, {
+await axios.delete(`${API_BASE_URL}/api/notes/${noteId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

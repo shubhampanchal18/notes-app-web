@@ -1,10 +1,12 @@
 const { Sequelize } = require('sequelize');
 const path = require('path');
 
+const sqliteStorage = process.env.SQLITE_STORAGE || path.join(__dirname, 'notesapp.db');
+
 // SQLite Database Connection
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: path.join(__dirname, 'notesapp.db'),
+  storage: sqliteStorage,
   logging: false // Set to console.log to see SQL queries
 });
 
